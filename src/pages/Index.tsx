@@ -13,102 +13,138 @@ const Index = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Dentist",
-    "name": "Curo Advanced Dental Care",
-    "image": "https://curodentalcare.com/logo.png",
-    "url": "https://curodentalcare.com",
-    "telephone": "+918788127264",
-    "email": "curodentalcare@gmail.com",
-    "address": {
+    name: "Curo Advanced Dental Care",
+    image: "https://curodentalcare.com/logo.png",
+    url: "https://curodentalcare.com",
+    telephone: "+918788127264",
+    email: "curodentalcare@gmail.com",
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "PLOT NO. B/73, MAULI KRUPA, SHIVAJI CHOWK, Sector 12",
-      "addressLocality": "Kharghar, Navi Mumbai",
-      "addressRegion": "Maharashtra",
-      "postalCode": "410210",
-      "addressCountry": "IN"
+      streetAddress: "PLOT NO. B/73, MAULI KRUPA, SHIVAJI CHOWK, Sector 12",
+      addressLocality: "Kharghar, Navi Mumbai",
+      addressRegion: "Maharashtra",
+      postalCode: "410210",
+      addressCountry: "IN",
     },
-    "geo": {
+    geo: {
       "@type": "GeoCoordinates",
-      "latitude": 19.0447,
-      "longitude": 73.0646
+      latitude: 19.0447,
+      longitude: 73.0646,
     },
-    "openingHoursSpecification": [
+    openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "10:00",
-        "closes": "14:00"
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "10:00",
+        closes: "14:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "17:00",
-        "closes": "21:00"
-      }
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "17:00",
+        closes: "21:00",
+      },
     ],
-    "priceRange": "$$",
-    "servesCuisine": "Dental Services",
-    "aggregateRating": {
+    priceRange: "$$",
+    servesCuisine: "Dental Services",
+    aggregateRating: {
       "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "150"
+      ratingValue: "5",
+      reviewCount: "150",
     },
-    "medicalSpecialty": ["Prosthodontics", "Oral and Maxillofacial Surgery", "Dental Implants"],
-    "hasOfferCatalog": {
+    medicalSpecialty: [
+      "Prosthodontics",
+      "Oral and Maxillofacial Surgery",
+      "Dental Implants",
+    ],
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Dental Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dental Implants" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Root Canal Treatment" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Teeth Whitening" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Braces & Aligners" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wisdom Tooth Extraction" } }
-      ]
-    }
+      name: "Dental Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Dental Implants" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Root Canal Treatment" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Teeth Whitening" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Braces & Aligners" },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: "Wisdom Tooth Extraction" },
+        },
+      ],
+    },
   };
 
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
+    mainEntity: [
       {
         "@type": "Question",
-        "name": "Is dental treatment painful?",
-        "acceptedAnswer": {
+        name: "Is dental treatment painful?",
+        acceptedAnswer: {
           "@type": "Answer",
-          "text": "Most treatments are performed using modern, pain-free techniques to ensure comfort. We use local anesthesia and the latest technology to minimize any discomfort."
-        }
+          text: "Most treatments are performed using modern, pain-free techniques to ensure comfort. We use local anesthesia and the latest technology to minimize any discomfort.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Do you treat children?",
-        "acceptedAnswer": {
+        name: "Do you treat children?",
+        acceptedAnswer: {
           "@type": "Answer",
-          "text": "Yes, we provide gentle and friendly dental care for kids including preventive care, cavity treatment, and education about oral hygiene."
-        }
+          text: "Yes, we provide gentle and friendly dental care for kids including preventive care, cavity treatment, and education about oral hygiene.",
+        },
       },
       {
         "@type": "Question",
-        "name": "How do I book an appointment?",
-        "acceptedAnswer": {
+        name: "How do I book an appointment?",
+        acceptedAnswer: {
           "@type": "Answer",
-          "text": "Simply click the WhatsApp booking button and send your preferred date and time. You can also call us directly at 087881 27264."
-        }
+          text: "Simply click the WhatsApp booking button and send your preferred date and time. You can also call us directly at 087881 27264.",
+        },
       },
       {
         "@type": "Question",
-        "name": "Do you offer advanced treatments like implants and laser dentistry?",
-        "acceptedAnswer": {
+        name: "Do you offer advanced treatments like implants and laser dentistry?",
+        acceptedAnswer: {
           "@type": "Answer",
-          "text": "Yes, we provide dental implants, laser dentistry, full mouth rehabilitation, and many other advanced treatments with 500+ successful implant procedures."
-        }
-      }
-    ]
+          text: "Yes, we provide dental implants, laser dentistry, full mouth rehabilitation, and many other advanced treatments with 500+ successful implant procedures.",
+        },
+      },
+    ],
   };
 
   return (
     <>
       <Helmet>
-        <title>Curo Advanced Dental Care | Best Dental Clinic in Kharghar, Navi Mumbai</title>
+        <title>
+          Curo Advanced Dental Care | Best Dental Clinic in Kharghar, Navi
+          Mumbai
+        </title>
         <meta
           name="description"
           content="Curo Advanced Dental Care offers advanced dental treatments including dental implants, root canal, teeth whitening, and more in Kharghar, Navi Mumbai. Led by expert Prosthodontist & Oral Surgeon with 500+ implants placed."
@@ -120,19 +156,31 @@ const Index = () => {
         <meta name="author" content="Curo Advanced Dental Care" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://curodentalcare.com" />
-        
+
         {/* Open Graph */}
-        <meta property="og:title" content="Curo Advanced Dental Care | Best Dental Clinic in Kharghar" />
-        <meta property="og:description" content="Advanced dental care with expert specialists. Dental implants, cosmetic dentistry, and more in Navi Mumbai." />
+        <meta
+          property="og:title"
+          content="Curo Advanced Dental Care | Best Dental Clinic in Kharghar"
+        />
+        <meta
+          property="og:description"
+          content="Advanced dental care with expert specialists. Dental implants, cosmetic dentistry, and more in Navi Mumbai."
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://curodentalcare.com" />
         <meta property="og:locale" content="en_IN" />
-        
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Curo Advanced Dental Care | Kharghar" />
-        <meta name="twitter:description" content="Advanced dental care with expert specialists in Navi Mumbai." />
-        
+        <meta
+          name="twitter:title"
+          content="Curo Advanced Dental Care | Kharghar"
+        />
+        <meta
+          name="twitter:description"
+          content="Advanced dental care with expert specialists in Navi Mumbai."
+        />
+
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}

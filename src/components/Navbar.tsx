@@ -44,7 +44,6 @@ export const Navbar = () => {
             className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
           />
         </a>
-
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (

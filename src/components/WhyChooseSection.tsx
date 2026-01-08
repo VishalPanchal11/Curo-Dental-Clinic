@@ -16,43 +16,33 @@ import clinicOutside from "@/assets/clinic-outside.png";
 const reasons = [
   {
     icon: Stethoscope,
-    title: "Best-in-class Surgical Expertise",
-    description: "Specialist-led care with advanced techniques",
+    title: "Specialist-led care & surgical expertise",
+    description: "Expert treatment by experienced surgical specialists",
   },
   {
     icon: Building2,
-    title: "Well-equipped & Hygienic Clinic",
-    description: "Spacious, modern, and comfortable environment",
+    title: "Spacious, hygienic, well-equipped clinic",
+    description: "Modern facility maintaining the highest standards",
   },
   {
     icon: ShieldCheck,
-    title: "Strict Sterilization Protocols",
-    description: "Complete infection control for your safety",
+    title: "Strict sterilization & infection control",
+    description: "Complete safety with rigorous hygiene protocols",
   },
   {
     icon: Scan,
-    title: "In-house Intraoral Scanner",
-    description: "Digitalized dentistry for precise diagnosis and treatment",
+    title: "Digital dentistry",
+    description: "Advanced diagnosis with in-house intraoral scanner",
   },
   {
     icon: FlaskConical,
-    title: "Advanced Dental Labs",
-    description: "Precise prosthetic fitting and long-lasting results",
+    title: "Advanced labs",
+    description: "Precise, long-lasting results with modern technology",
   },
   {
     icon: BadgeCheck,
-    title: "Transparent & Affordable",
-    description: "No hidden charges, clear pricing always",
-  },
-  {
-    icon: Users,
-    title: "One-to-One Communication",
-    description: "Complete clarity with direct doctor interaction",
-  },
-  {
-    icon: Heart,
-    title: "Calm & Comfortable Care",
-    description: "Gentle approach for anxious patients",
+    title: "Transparent & affordable pricing",
+    description: "Ethical care with no hidden costs",
   },
 ];
 
@@ -66,9 +56,6 @@ export const WhyChooseSection = () => {
       ref={sectionRef}
       className="section-padding bg-gradient-gold-subtle relative overflow-hidden"
     >
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-brand rounded-full blur-3xl opacity-5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container-custom relative z-10">
         {/* Section Header */}
@@ -76,25 +63,28 @@ export const WhyChooseSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-md:mb-6"
         >
           <span className="inline-block px-4 py-2 bg-white/50 backdrop-blur-sm rounded-full text-sm font-semibold text-gold-dark mb-4 border border-white/20 shadow-sm uppercase tracking-wider">
             ⭐ Why Choose Us
           </span>
-          <h2 className="section-title">Why Patients Trust Our Clinic</h2>
+          <h2 className="section-title">
+            Why Patients Trust
+            <br className="md:hidden" /> Our Clinic
+          </h2>
           <p className="section-subtitle mx-auto">
             Curo Advanced Dental Care is your one-stop destination for ethical,
             advanced, and reliable dental treatment
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 md:gap-16 items-center">
           {/* Reasons Grid */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="grid sm:grid-cols-2 gap-5"
+            className="grid sm:grid-cols-2 gap-5 order-2 md:order-1"
           >
             {reasons.map((reason, index) => (
               <motion.div
@@ -102,7 +92,7 @@ export const WhyChooseSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bg-white p-5 rounded-2xl border border-transparent hover:border-gold/30 shadow-sm hover:shadow-gold-lg transition-all duration-300 group relative overflow-hidden"
+                className="bg-white p-5 max-md:p-3 rounded-2xl border border-transparent hover:border-gold/30 shadow-md hover:shadow-gold transition-all duration-300 group relative overflow-hidden"
               >
                 {/* Hover Glow */}
                 <div className="absolute -right-4 -top-4 w-16 h-16 bg-gold/5 rounded-full blur-xl group-hover:bg-gold/10 transition-colors" />
@@ -129,22 +119,22 @@ export const WhyChooseSection = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            className="relative order-1 md:order-2"
           >
-            <div className="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white relative z-10">
+            <div className="rounded-[1.5rem] overflow-hidden shadow-2xl border-4 border-white relative z-10 md:-top-8 ">
               <img
                 src={clinicOutside}
                 alt="Curo Advanced Dental Care Clinic Exterior"
-                className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+                className="w-full object-cover transform hover:scale-[102%] transition-transform duration-300"
                 loading="lazy"
               />
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl z-20 max-w-xs border border-gray-50 animate-fade-in">
-              <div className="flex items-center gap-4 mb-2">
+            <div className="absolute bottom-0 max-md:-bottom-8 left-[15%]  bg-white py-4 px-3 max-md:p-2 rounded-2xl shadow-xl z-20 max-w-xs border border-1 border-gold animate-fade-in">
+              <div className="flex items-center gap-3">
                 <div className="flex -space-x-3">
                   {[1, 2, 3].map((i) => (
                     <div
@@ -162,12 +152,7 @@ export const WhyChooseSection = () => {
                   </span>
                 </div>
               </div>
-              <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
-                <div className="h-full bg-gold w-[90%]" />
-              </div>
             </div>
-
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-gold/10 rounded-full blur-2xl -z-10" />
           </motion.div>
         </div>
 
@@ -176,22 +161,16 @@ export const WhyChooseSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-24 text-center max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gold/10 relative overflow-hidden"
+          className="mt-16 text-center md:max-w-[80%] mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gold/70 relative overflow-hidden"
         >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-gold" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gold/80" />
           <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 font-display">
-            About Curo Advanced Dental Care
+            About Curo <br className="md:hidden" />Advanced Dental Care
           </h3>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Choosing the right dental clinic is an important decision for you
-            and your family. At{" "}
-            <span className="font-semibold text-gold-dark">
-              Curo Advanced Dental Care
-            </span>
-            , we focus on providing dental treatment that is not only
-            accessible, but also advanced, transparent, and patient-friendly.
-            Our clinic is led by highly experienced surgical experts, offering
-            comprehensive dental and maxillofacial care under one roof.
+          <p className="text-gray-600 text-md md:leading-relaxed max-md:text-justify">
+            Choosing the right dental clinic matters. At Curo Advanced Dental Care, we provide treatment that is advanced, transparent, and patient-friendly.</p>          <p className="mt-3 text-gray-600 text-md md:leading-relaxed max-md:text-justify">
+
+Led by experienced surgical specialists, our clinic offers complete dental and maxillofacial care under one roof. Every treatment is personalized, clearly explained, and priced with no hidden costs.
           </p>
         </motion.div>
       </div>

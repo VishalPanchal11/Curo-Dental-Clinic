@@ -6,14 +6,8 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden pt-20"
+      className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden pt-28 pb-24 md:pb-16 max-md:pt-28"
     >
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[100px] opacity-60" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[80px]" />
-      </div>
-
       <div className="container-custom relative z-10 px-4 md:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
@@ -27,11 +21,11 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-gold/10 border border-gold/20 rounded-full mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-gold/10 border border-gold/20 rounded-full mb-4"
             >
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
               <span className="text-sm font-semibold text-gold-dark tracking-wide uppercase">
-                Now Accepting New Patients
+                Because Every Smile Matters
               </span>
             </motion.div>
 
@@ -39,7 +33,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight"
+              className="text-4xl md:text-[3.5rem] font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight max-md:pt-4"
             >
               Gentle, Advanced & <br className="hidden lg:block" />
               <span className="text-gradient-gold relative">
@@ -64,7 +58,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg md:text-xl text-gray-600 font-light mb-8 leading-relaxed"
+              className="text-lg md:text-xl text-gray-600 font-light mb-6 leading-relaxed max-md:mx-4"
             >
               Experience world-class dentistry with a compassionate touch. We
               combine state-of-the-art technology with personalized care to
@@ -75,20 +69,20 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-md:mx-16"
             >
               <a
                 href="https://wa.me/8788127264"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-lg px-8 py-4 shadow-gold hover:shadow-gold-lg"
+                className="btn-primary text-lg px-6 py-2 shadow-gold hover:shadow-gold-lg"
               >
                 <MessageCircle className="w-5 h-5" />
                 Book Your Visit
               </a>
               <a
                 href="#doctors"
-                className="btn-outline text-lg px-8 py-4 border-gray-300 hover:border-gold hover:bg-gold/5"
+                className="btn-outline text-lg px-6 py-2 border-gray-300 hover:border-gold hover:bg-gold/5"
               >
                 Meet The Doctors
               </a>
@@ -99,7 +93,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-gray-100"
+              className="grid grid-cols-3 mt-6 mx-6 pt-4 border-t border-gray-100"
             >
               <div>
                 <p className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -133,7 +127,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="relative lg:h-[600px] w-full"
+            className="relative h-[450px] w-full"
           >
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/50">
               <img
@@ -149,14 +143,14 @@ export const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.6 }}
-                className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/20"
+                className="absolute bottom-4 left-4 right-4 md:left-20 md:right-20 bg-white/95 backdrop-blur-xl p-2 rounded-full"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center text-2xl">
                     ✨
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-lg">
+                    <p className="font-bold text-gray-900 text-md">
                       Premium Dental Care
                     </p>
                     <p className="text-sm text-gray-600">
@@ -166,9 +160,6 @@ export const HeroSection = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* Decorative blob behind image */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/5 rounded-full blur-3xl" />
           </motion.div>
         </div>
       </div>
@@ -178,7 +169,7 @@ export const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 z-20 left-1/2 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -57,10 +57,10 @@ export const FAQSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-2 bg-gold/10 rounded-full text-sm font-semibold text-gold-dark mb-4 tracking-wide uppercase">
-            ❓ FAQ
+            ? FAQs
           </span>
           <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle mx-auto">
@@ -73,7 +73,7 @@ export const FAQSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-3xl mx-auto space-y-4"
+          className="md:w-[80%] mx-auto space-y-4"
         >
           {faqs.map((faq, index) => (
             <motion.div
@@ -85,24 +85,22 @@ export const FAQSection = () => {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className={`w-full flex items-center justify-between p-6 rounded-2xl text-left transition-all duration-300 ${
-                  openIndex === index
-                    ? "bg-white shadow-gold border border-gold/40"
-                    : "bg-gray-50 border border-transparent hover:bg-white hover:shadow-sm"
+                className={`w-full flex items-center justify-between p-4 max-md:p-2 rounded-2xl max-md:rounded-full text-left hover:shadow-sm shadow-gold hover:shadow-gold transition-all border border-gold/40 duration-300 ${
+                  openIndex === index ? "bg-white" : "bg-gray-50"
                 }`}
               >
                 <div className="flex items-center gap-4">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                    className={`w-8 min-w-8 h-8 min-h-8 rounded-full flex items-center justify-center transition-colors ${
                       openIndex === index
                         ? "bg-gold text-white"
                         : "bg-gray-200 text-gray-500 group-hover:bg-gold/20 group-hover:text-gold-dark"
                     }`}
                   >
-                    <HelpCircle className="w-5 h-5" />
+                    <HelpCircle className="w-5 min-w-5 h-5 min-h-5" />
                   </div>
                   <span
-                    className={`font-bold text-lg ${
+                    className={`font-bold text-lg max-md:text-sm ${
                       openIndex === index
                         ? "text-gray-900"
                         : "text-gray-700 group-hover:text-gray-900"
@@ -133,7 +131,7 @@ export const FAQSection = () => {
                 className="overflow-hidden"
               >
                 <div
-                  className={`p-6 pt-2 text-gray-600 leading-relaxed border-x border-b border-gold/10 rounded-b-2xl mx-2 ${
+                  className={`p-4 max-md:p-2 pt-2 text-gray-600 leading-relaxed border-x border-b border-gold/10 rounded-b-2xl mx-2 max-md:text-sm max-md:text-justify ${
                     openIndex === index ? "bg-white shadow-sm" : ""
                   }`}
                 >

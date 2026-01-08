@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 const testimonials = [
   {
@@ -34,17 +35,50 @@ const testimonials = [
 export const TestimonialsSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  // Embla Carousel setup
+  // align: 'start' allows multiple slides to be visible nicely
+  // containScroll: 'trimSnaps' prevents excessive whitespace at ends
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    slidesToScroll: 1,
+    containScroll: "trimSnaps",
+    loop: false, // Requested: "slider will not be sliding automatically" - implies manual control, usually loop is optional but non-auto sliding is key.
+  });
 
-  const prevTestimonial = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback((emblaApi) => {
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, []);
+
+  const onScroll = useCallback((emblaApi) => {
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+    setScrollProgress(progress * 100);
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onSelect(emblaApi);
+    onScroll(emblaApi);
+
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("reInit", onScroll);
+    emblaApi.on("select", onSelect);
+    emblaApi.on("scroll", onScroll);
+  }, [emblaApi, onSelect, onScroll]);
 
   return (
     <section
@@ -52,17 +86,13 @@ export const TestimonialsSection = () => {
       ref={sectionRef}
       className="section-padding bg-gradient-hero relative overflow-hidden"
     >
-      {/* Decorative Elements */}
-      <div className="absolute top-10 left-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-gold/10 rounded-full blur-3xl -z-10" />
-
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <span className="inline-block px-4 py-2 bg-gold/10 rounded-full text-sm font-semibold text-gold-dark mb-4 tracking-wide uppercase">
             💬 Testimonials
@@ -73,80 +103,107 @@ export const TestimonialsSection = () => {
           </p>
         </motion.div>
 
-        {/* Testimonial Carousel */}
+        {/* Carousel Container */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          className="px-10 md:px-16 mx-auto relative" // Added padding for arrows space
         >
-          <div className="relative bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-gray-100">
-            {/* Quote Icon */}
-            <div className="absolute -top-6 left-8 w-14 h-14 bg-gradient-gold rounded-full flex items-center justify-center shadow-gold-lg transform rotate-12">
-              <Quote className="w-7 h-7 text-white fill-white" />
-            </div>
-
-            {/* Content */}
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
-              className="text-center pt-6"
+          {/* Arrows - Desktop: Absolute Left/Right */}
+          <div className="hidden md:block">
+            <button
+              onClick={scrollPrev}
+              disabled={!canScrollPrev}
+              className="absolute left-[-1rem] top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white hover:bg-gold hover:text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-gold"
+              aria-label="Previous testimonial"
             >
-              {/* Stars */}
-              <div className="flex justify-center gap-1.5 mb-8">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-gold text-gold" />
-                ))}
-              </div>
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={scrollNext}
+              disabled={!canScrollNext}
+              className="absolute right-[-1rem] top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white hover:bg-gold hover:text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-gold"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
 
-              {/* Text */}
-              <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8 font-display italic">
-                "{testimonials[currentIndex].text}"
-              </p>
+          {/* Mobile Arrows - Inside/Overlay or Above/Below? User said: "arrow buttons on left most and rightmost of screen" -> implying they want arrows even on mobile or just unified design. 
+               However, user also said "slider below". Let's put arrows on sides for mobile too but smaller or part of the flow. 
+               Actually, "in mobile 1 card at a time... it can slide through arrow buttons or in mobile devices sliding through finger". 
+               Let's keep the arrows visible on mobile too but positioned carefully.
+            */}
+          <button
+            onClick={scrollPrev}
+            disabled={!canScrollPrev}
+            className="md:hidden absolute left-[-1rem] top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-gold hover:text-white disabled:opacity-30 flex items-center justify-center transition-all shadow-md border border-gold backdrop-blur-sm"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollNext}
+            disabled={!canScrollNext}
+            className="md:hidden absolute right-[-1rem] top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/80 hover:bg-gold hover:text-white disabled:opacity-30 flex items-center justify-center transition-all shadow-md border border-gold backdrop-blur-sm"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-              {/* Author */}
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-1 bg-gold/30 rounded-full mb-4" />
-                <p className="font-bold text-gray-900 text-lg uppercase tracking-wider">
-                  {testimonials[currentIndex].author}
-                </p>
-                <p className="text-gray-500 text-sm">Verified Patient</p>
-              </div>
-            </motion.div>
+          <div className="overflow-hidden p-2 -m-2" ref={emblaRef}>
+            <div className="flex -ml-4 md:-ml-6">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 pl-4 md:pl-6"
+                >
+                  <div className="h-full relative bg-white rounded-2xl p-6 md:p-8 md:shadow-lg border border-gray-100 max-md:border-gold flex flex-col">
+                    {/* Quote Icon */}
+                    <div className="absolute top-2 right-6 w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center">
+                      <Quote className="w-5 h-5 text-gold-dark opacity-50" />
+                    </div>
 
-            {/* Navigation */}
-            <div className="flex justify-center gap-6 mt-10 items-center">
-              <button
-                onClick={prevTestimonial}
-                className="w-12 h-12 rounded-full bg-gray-50 hover:bg-gold hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-gold"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <div className="flex items-center gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex
-                        ? "w-8 bg-gold"
-                        : "w-2 bg-gray-200 hover:bg-gold/50"
-                    }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-              <button
-                onClick={nextTestimonial}
-                className="w-12 h-12 rounded-full bg-gray-50 hover:bg-gold hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-gold"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
+                    {/* Stars */}
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+                      ))}
+                    </div>
+
+                    {/* Text */}
+                    <p className="text-gray-700 leading-relaxed mb-2 font-display italic flex-grow">
+                      "{testimonial.text}"
+                    </p>
+
+                    {/* Author */}
+                    <div className="mt-auto pt-4 border-t border-gray-50 flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold-dark font-bold text-lg">
+                        {testimonial.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-bold text-gray-900 text-sm uppercase tracking-wide">
+                          {testimonial.author}
+                        </p>
+                        <p className="text-gray-400 text-xs font-medium">
+                          Verified Patient
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Scrollbar / Progress */}
+          <div className="md:hidden mt-8 px-4">
+            <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gold rounded-full transition-all duration-100 ease-out"
+                style={{ width: `${scrollProgress}%` }}
+              />
             </div>
           </div>
         </motion.div>

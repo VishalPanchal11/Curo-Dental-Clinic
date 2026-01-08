@@ -131,13 +131,13 @@ export const TreatmentsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 max-md:mb-10"
         >
           <span className="inline-block px-4 py-2 bg-gold/10 rounded-full text-sm font-semibold text-gold-dark mb-4 tracking-wide uppercase">
             Comprehensive Care
           </span>
           <h2 className="section-title">World-Class Treatments</h2>
-          <p className="section-subtitle mx-auto">
+          <p className="text-lg max-md:text-base text-muted-foreground mx-auto">
             From routine check-ups to complex full mouth rehabilitation,{" "}
             <br className="hidden md:block" />
             we offer a complete spectrum of dental services.
@@ -145,7 +145,7 @@ export const TreatmentsSection = () => {
         </motion.div>
 
         {/* Treatment Categories */}
-        <div className="space-y-20">
+        <div className="space-y-12">
           {treatmentCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -153,39 +153,41 @@ export const TreatmentsSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
             >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-1 bg-gradient-gold rounded-full" />
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-4 h-1 bg-gradient-gold rounded-full" />
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                   {category.title}
                 </h3>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {category.items.map((item, itemIndex) => (
                   <motion.div
                     key={item.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{
-                      duration: 0.5,
+                      duration: 0.2,
                       delay: categoryIndex * 0.1 + itemIndex * 0.05,
                     }}
-                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                    className="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-gold-lg border border-transparent hover:border-gold/30 transition-all duration-300 relative overflow-hidden"
+                    whileHover={{ x: 3, transition: { duration: 0.2 } }}
+                    className="group bg-white rounded-2xl p-3 shadow-md hover:shadow-gold-lg border border-transparent hover:border-gold/30 transition-all duration-2 00 relative overflow-hidden flex items-center gap-3.5"
                   >
                     {/* Hover Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-gold opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-gold opacity-0 group-hover:opacity-5 transition-opacity duration-200" />
 
-                    <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gold-dark group-hover:bg-gold group-hover:text-white transition-colors duration-300 shadow-inner">
-                      <item.icon className="w-7 h-7" />
+                    <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gold-dark group-hover:bg-gold group-hover:text-white transition-colors duration-200 shadow-inner flex-shrink-0">
+                      <item.icon className="w-6 h-6" />
                     </div>
 
-                    <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-gold-dark transition-colors">
-                      {item.name}
-                    </h4>
-                    <p className="text-sm text-gray-500 leading-relaxed">
-                      {item.description}
-                    </p>
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900 group-hover:text-gold-dark transition-colors">
+                        {item.name}
+                      </h4>
+                      <p className="text-sm text-gray-500 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -198,7 +200,7 @@ export const TreatmentsSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-20 text-center"
+          className="mt-20 max-md:mt-12 text-center"
         >
           <div className="bg-gray-900 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl max-w-4xl mx-auto">
             {/* Background shimmer */}
@@ -208,10 +210,11 @@ export const TreatmentsSection = () => {
             </div>
 
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-white mb-4">
-                Ready to transform your smile?
+              <h3 className="text-3xl max-md:text-2xl font-bold text-white mb-4">
+                Ready to transform
+                <br className="md:hidden" /> your smile?
               </h3>
-              <p className="text-gray-300 mb-8 max-w-xl mx-auto text-lg">
+              <p className="text-gray-300 mb-8 max-md:mb-6 max-md:text-base  mx-auto text-lg">
                 Book a consultation today and let our experts guide you to
                 better oral health.
               </p>

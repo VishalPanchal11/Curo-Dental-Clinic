@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,7 +7,6 @@
 /* Curo Advanced Dental Care - Premium Medical Design System */
 /* Primary: Gold #D5B36B | Secondary: Black | Light Theme */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -103,7 +104,7 @@
 
 @layer components {
   .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+    @apply px-4 py-12;
   }
 
   .container-custom {
@@ -178,7 +179,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-muted-foreground max-w-2xl;
+    @apply text-lg md:text-lg max-md:text-base text-muted-foreground;
   }
 
   .card-treatment {
@@ -275,5 +276,14 @@
     );
     background-size: 200% 100%;
     animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold-custom {
+    0%{ box-shadow: 0 0 0 0 rgba(213, 179, 107, 0.4); }
+    100% { box-shadow: 0 0 0 15px rgba(213, 179, 107, 0); }
+  }
+
+  .animate-pulse-gold-slow-custom {
+    animation: pulse-gold-custom 1.5s infinite;
   }
 }

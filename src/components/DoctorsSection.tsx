@@ -57,6 +57,7 @@ interface DoctorCardProps {
   highlights: { icon: React.ElementType; text: string }[];
   expertise?: string[];
   awards?: string[];
+  emoji: string;
   delay?: number;
 }
 
@@ -67,6 +68,7 @@ const DoctorCard = ({
   highlights,
   expertise,
   awards,
+  emoji,
   delay = 0,
 }: DoctorCardProps) => {
   const ref = useRef(null);
@@ -78,12 +80,12 @@ const DoctorCard = ({
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className="bg-card rounded-3xl p-6 md:p-8 shadow-card border border-border hover-lift gold-border-glow"
+      className="bg-card rounded-3xl p-6 md:p-8 shadow-xl border border-border hover-lift gold-border-glow"
     >
       {/* Header */}
       <div className="flex items-start gap-4 mb-6">
-        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-gold rounded-2xl flex items-center justify-center flex-shrink-0 shadow-gold">
-          <span className="text-3xl md:text-4xl">👨‍⚕️</span>
+        <div className="w-14 h-14 bg-gradient-gold rounded-2xl flex items-center justify-center flex-shrink-0 shadow-gold">
+          <span className="text-3xl md:text-3xl">{emoji}</span>
         </div>
         <div>
           <h3 className="text-xl md:text-2xl font-bold text-foreground">
@@ -94,12 +96,17 @@ const DoctorCard = ({
       </div>
 
       {/* Description */}
-      <p className="text-muted-foreground mb-6 leading-relaxed">
-        {description}
-      </p>
+      <div className="text-muted-foreground mb-6 leading-relaxed space-y-4 text-justify text-sm">
+        {description
+          .split("\n")
+          .map(
+            (paragraph, index) =>
+              paragraph.trim() && <p key={index}>{paragraph.trim()}</p>
+          )}
+      </div>
 
       {/* Quick Highlights */}
-      <div className="mb-6">
+      <div className="mb-4">
         <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
           Quick Highlights
         </h4>
@@ -112,7 +119,7 @@ const DoctorCard = ({
               transition={{ duration: 0.4, delay: delay + 0.1 + index * 0.05 }}
               className="flex items-start gap-3"
             >
-              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-6 h-6 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                 <item.icon className="w-4 h-4 text-primary" />
               </div>
               <span className="text-sm text-foreground/80">{item.text}</span>
@@ -123,7 +130,7 @@ const DoctorCard = ({
 
       {/* Expertise */}
       {expertise && expertise.length > 0 && (
-        <div className="mb-6">
+        <div className="py-4 border-t border-border">
           <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
             Clinical Expertise
           </h4>
@@ -148,15 +155,18 @@ const DoctorCard = ({
             Awards & Achievements
           </h4>
           <ul className="grid gap-2">
-            {awards.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2 text-sm text-muted-foreground"
-              >
-                <span className="text-primary">🏆</span>
-                {item}
-              </li>
-            ))}
+            {awards.map((item, index) => {
+              const isAward = item.toLowerCase().includes("award");
+              return (
+                <li
+                  key={index}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
+                  <span className="text-primary">{isAward ? "🏆" : "📜"}</span>
+                  {item}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
@@ -172,7 +182,7 @@ export const DoctorsSection = () => {
     <section
       id="doctors"
       ref={sectionRef}
-      className="section-padding bg-white relative"
+      className="py-12 px-4 bg-white relative"
     >
       <div className="container-custom">
         {/* Section Header */}
@@ -180,10 +190,10 @@ export const DoctorsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <span className="inline-block px-4 py-2 bg-gold/10 rounded-full text-sm font-semibold text-gold-dark mb-4 tracking-wide uppercase">
-            👨‍⚕️ Expert Care
+            Expert Care
           </span>
           <h2 className="section-title">Meet Our Specialists</h2>
           <p className="section-subtitle mx-auto">
@@ -197,15 +207,24 @@ export const DoctorsSection = () => {
           <DoctorCard
             name="Dr. Sachin Sonawane"
             title="Prosthodontist & Implantologist"
-            description="Dr. Sachin Sonawane is an experienced Prosthodontist and Implantologist known for his precision, ethical practice, and patient-first approach. He is a former Associate Professor at Aditya Dental College, bringing a strong blend of academic excellence and advanced clinical expertise. During his postgraduate training, he placed 100+ dental implants and has since completed 500+ implant procedures, delivering predictable, long-lasting, and natural-looking results through prosthetically driven guided implantology."
+            description={
+              "Dr. Sachin Sonawane is an experienced Prosthodontist and Implantologist known for precision, ethical practice, and patient-focused care. A former Associate Professor at Aditya Dental College, he combines academic excellence with advanced clinical expertise.\n\nWith 500+ successful implant procedures, he specializes in prosthodontically driven guided implantology and is a recipient of the prestigious F.D. Mirza Award by the Indian Prosthodontic Society."
+            }
+            emoji="👨‍⚕️"
             highlights={drSachinHighlights}
+            awards={[
+              "F.D. Mirza Award (First Prize) – Indian Prosthodontic Society",
+            ]}
             delay={0.1}
           />
 
           <DoctorCard
             name="Dr. Dhanashri Sonawane"
-            title="Oral & Maxillofacial Surgeon"
-            description="Dr. Dhanashri Sonawane is a highly skilled Oral & Maxillofacial Surgeon and Implantologist, known for advanced surgical expertise, academic excellence, and compassionate, patient-focused care. She brings a strong surgical approach to implant dentistry, with 500+ successful dental implant placements to date, focusing on precise planning, bone health, and long-term implant success—even in complex cases."
+            title="Oral & Maxillofacial Surgeon & Implantologist"
+            description={
+              "Dr. Dhanashri Sonawane is a highly skilled Oral & Maxillofacial Surgeon known for providing precise, painless surgical care and patient-focused treatment. With 500+ implant placements, she specializes in advanced implant surgeries, bone augmentation, and complex maxillofacial procedures.\n\nAn award-winning researcher with national and international publications, she also holds multiple copyrights in Oral & Maxillofacial Surgery, reflecting her strong academic and research excellence."
+            }
+            emoji="👩‍⚕️"
             highlights={drDhanashriHighlights}
             expertise={[
               "Painless, atraumatic & minimally invasive surgical procedures",
@@ -216,10 +235,10 @@ export const DoctorsSection = () => {
               "Management of cysts, tumors & oral biopsies",
             ]}
             awards={[
-              "1st Award – AOMSI Poster Presentation",
-              "1st Award – Paper Presentation on Pan-Facial Fractures",
-              "1st Rank – MUHS, Nashik (BDS)",
-              "4th Rank – MDS Oral & Maxillofacial Surgery",
+              "AOMSI Poster Presentation - 1st Award",
+              "Paper Presentation on Pan-Facial Fractures - 1st Award",
+              "MUHS, Nashik (BDS) - 1st Rank",
+              "MDS Oral & Maxillofacial Surgery - 4th Rank",
             ]}
             delay={0.2}
           />

@@ -115,7 +115,7 @@ export default {
         "scale-in": "scale-in 0.5s ease-out forwards",
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
         "shimmer": "shimmer 3s ease-in-out infinite",
-        "pulse-gold": "pulse-gold 2s infinite",
+        "pulse-gold-slow": "pulse-gold 4.5s infinite",
       },
     },
   },
