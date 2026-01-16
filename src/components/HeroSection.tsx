@@ -17,17 +17,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-gold/10 border border-gold/20 rounded-full mb-4"
-            >
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-              <span className="text-sm font-semibold text-gold-dark tracking-wide uppercase">
-                Because Every Smile Matters
-              </span>
-            </motion.div>
+            
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
