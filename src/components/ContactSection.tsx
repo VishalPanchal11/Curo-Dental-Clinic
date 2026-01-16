@@ -71,7 +71,7 @@ export const ContactSection = () => {
                       Phone Number:
                     </h4>
                     <a
-                      href="tel:08788127264"
+                      href="tel:+918788127264"
                       className="text-gray-700 hover:text-gold transition-colors text-xl font-semibold block"
                     >
                       +91 87881 27264 (Mon-Sat)
@@ -133,7 +133,7 @@ export const ContactSection = () => {
 
               {/* CTA Button */}
               <a
-                href="https://wa.me/8788127264?text=Hello%20%F0%9F%91%8B%0AThank%20you%20for%20reaching%20our%20dental%20clinic.%20How%20may%20we%20assist%20you%20with%20your%20dental%20appointment%20today%3F"
+                href="https://wa.me/918788127264?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary w-full max-md:w-[80%] max-md:mx-[10%] text-lg justify-center shadow-gold hover:shadow-gold-lg font-bold"
@@ -296,7 +296,7 @@ export const ContactSection = () => {
                 Ready for your checkup?
               </p>
               <a
-                href="tel:08788127264"
+                href="tel:+918788127264"
                 className="text-2xl  font-bold text-gold hover:text-white transition-colors"
               >
                 +91 8788127264

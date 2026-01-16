@@ -72,7 +72,7 @@ export const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-md:mx-16"
             >
               <a
-                href="https://wa.me/8788127264"
+                href="https://wa.me/918788127264?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary text-lg px-6 py-2 shadow-gold hover:shadow-gold-lg"

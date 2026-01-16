@@ -219,7 +219,7 @@ export const TreatmentsSection = () => {
                 better oral health.
               </p>
               <a
-                href="https://wa.me/8788127264?text=Hello%20%F0%9F%91%8B%0AThank%20you%20for%20reaching%20our%20dental%20clinic.%20How%20may%20we%20assist%20you%20with%20your%20dental%20appointment%20today%3F"
+                href="https://wa.me/918788127264?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2 text-lg px-8 hover:scale-105"
