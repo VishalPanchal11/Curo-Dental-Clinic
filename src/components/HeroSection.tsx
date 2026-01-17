@@ -6,24 +6,38 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden pt-28 pb-24 md:pb-16 max-md:pt-28"
+      className="relative min-h-[90vh] max-md:min-h-[70vh] flex items-center bg-gradient-hero overflow-hidden pb-24 pt-28"
     >
-      <div className="container-custom relative z-10 px-4 md:px-8">
+      {/* Mobile Background Image */}
+      <div
+        className="absolute inset-x-0 top-24 h-[425px] z-0 md:hidden"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 60%, transparent 100%)",
+        }}
+      >
+        <img
+          src={clinicInside}
+          alt="Clinic Background"
+          className="w-full h-full object-cover -mt-5"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30" />
+      </div>
+      <div className="container-custom relative z-10 px-4 md:px-8 max-md:-mt-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0"
+            className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 max-md:mt-20"
           >
-            
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-[3.5rem] font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight max-md:pt-4"
+              className="text-4xl md:text-[3.5rem] font-bold text-white md:text-gray-900 leading-[1.1] mb-6 tracking-tight max-md:pt-4"
             >
               Gentle, Advanced & <br className="hidden lg:block" />
               <span className="text-gradient-gold relative">
@@ -48,7 +62,7 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg md:text-xl text-gray-600 font-light mb-6 leading-relaxed max-md:mx-4"
+              className="text-lg md:text-xl text-gray-100 md:text-gray-600 font-light mb-8 leading-relaxed max-md:mx-0"
             >
               Experience world-class dentistry with a compassionate touch. We
               combine state-of-the-art technology with personalized care to
@@ -65,14 +79,14 @@ export const HeroSection = () => {
                 href="https://wa.me/918788127264?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-lg px-6 py-2 shadow-gold hover:shadow-gold-lg"
+                className="btn-primary text-lg px-6 py-2 shadow-gold hover:shadow-gold-lg max-md:border max-md:border-gray-300"
               >
                 <MessageCircle className="w-5 h-5" />
                 Book Your Visit
               </a>
               <a
                 href="#doctors"
-                className="btn-outline text-lg px-6 py-2 border-gray-300 hover:border-gold hover:bg-gold/5"
+                className="btn-outline text-lg px-6 py-2 border-gray-400 md:border-gray-300 text-gray-900 md:text-gray-900 hover:border-gold hover:bg-gold/5 whitespace-nowrap"
               >
                 Meet The Doctors
               </a>
@@ -83,29 +97,29 @@ export const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="grid grid-cols-3 mt-6 mx-6 pt-4 border-t border-gray-100"
+              className="grid grid-cols-3 mt-8 pt-6 border-t border-gray-200 md:border-gray-100"
             >
               <div>
-                <p className="text-3xl md:text-4xl font-bold text-gray-900">
+                <p className="text-3xl md:text-4xl font-bold text-gray-900 md:text-gray-900">
                   500+
                 </p>
-                <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mt-1">
+                <p className="text-sm font-medium text-gray-600 md:text-gray-500 uppercase tracking-wide mt-1">
                   Implants
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-bold text-gray-900">
+                <p className="text-3xl md:text-4xl font-bold text-gray-900 md:text-gray-900">
                   10+
                 </p>
-                <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mt-1">
+                <p className="text-sm font-medium text-gray-600 md:text-gray-500 uppercase tracking-wide mt-1">
                   Years Exp.
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-bold text-gray-900">
+                <p className="text-3xl md:text-4xl font-bold text-gray-900 md:text-gray-900">
                   5k+
                 </p>
-                <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mt-1">
+                <p className="text-sm font-medium text-gray-600 md:text-gray-500 uppercase tracking-wide mt-1">
                   Patients
                 </p>
               </div>
@@ -117,7 +131,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="relative h-[450px] w-full"
+            className="relative h-[450px] w-full hidden md:block"
           >
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/50">
               <img
@@ -133,17 +147,17 @@ export const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.6 }}
-                className="absolute bottom-4 left-4 right-4 md:left-20 md:right-20 bg-white/95 backdrop-blur-xl p-2 rounded-full"
+                className="absolute bottom-2 left-2 bg-white/95 backdrop-blur-xl p-1 pr-2 rounded-full"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center text-2xl">
+                <div className="flex items-center gap-1">
+                  <div className="w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-xl">
                     ✨
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-md">
+                    <p className="font-bold text-gray-900 text-sm">
                       Premium Dental Care
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs text-gray-600">
                       State-of-the-art facility in Navi Mumbai
                     </p>
                   </div>

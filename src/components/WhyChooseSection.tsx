@@ -12,6 +12,9 @@ import {
   Heart,
 } from "lucide-react";
 import clinicOutside from "@/assets/clinic-outside.png";
+import patient1 from "@/assets/patient-1.png";
+import patient2 from "@/assets/patient-2.png";
+import patient3 from "@/assets/patient-3.png";
 
 const reasons = [
   {
@@ -56,7 +59,6 @@ export const WhyChooseSection = () => {
       ref={sectionRef}
       className="section-padding bg-gradient-gold-subtle relative overflow-hidden"
     >
-
       <div className="container-custom relative z-10">
         {/* Section Header */}
         <motion.div
@@ -72,9 +74,12 @@ export const WhyChooseSection = () => {
             Why Patients Trust
             <br className="md:hidden" /> Our Clinic
           </h2>
-          <p className="section-subtitle mx-auto">
+          <p className="section-subtitle md:max-w-5xl mx-auto">
             Curo Advanced Dental Care is your one-stop destination for ethical,
-            advanced, and reliable dental treatment
+            advanced, and reliable dental treatment. Led by experienced surgical
+            specialists, our clinic offers complete dental and maxillofacial
+            care under one roof. Every treatment is personalized, clearly
+            explained, and priced with no hidden costs.
           </p>
         </motion.div>
 
@@ -133,15 +138,19 @@ export const WhyChooseSection = () => {
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute bottom-0 max-md:-bottom-8 left-[15%]  bg-white py-4 px-3 max-md:p-2 rounded-2xl shadow-xl z-20 max-w-xs border border-1 border-gold animate-fade-in">
+            <div className="absolute bottom-2 max-md:-bottom-6 -left-2  bg-white p-1 md:p-2 max-md:p-2 rounded-2xl shadow-xl z-20 max-w-xs border border-1 border-gold animate-fade-in">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
+                  {[patient1, patient2, patient3].map((img, i) => (
                     <div
                       key={i}
-                      className={`w-8 h-8 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-500`}
+                      className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden"
                     >
-                      {i === 3 ? "+" : ""}
+                      <img
+                        src={img}
+                        alt={`Patient ${i + 1}`}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   ))}
                 </div>
@@ -155,24 +164,6 @@ export const WhyChooseSection = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* About Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center md:max-w-[80%] mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gold/70 relative overflow-hidden"
-        >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gold/80" />
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 font-display">
-            About Curo <br className="md:hidden" />Advanced Dental Care
-          </h3>
-          <p className="text-gray-600 text-md md:leading-relaxed max-md:text-justify">
-            Choosing the right dental clinic matters. At Curo Advanced Dental Care, we provide treatment that is advanced, transparent, and patient-friendly.</p>          <p className="mt-3 text-gray-600 text-md md:leading-relaxed max-md:text-justify">
-
-Led by experienced surgical specialists, our clinic offers complete dental and maxillofacial care under one roof. Every treatment is personalized, clearly explained, and priced with no hidden costs.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

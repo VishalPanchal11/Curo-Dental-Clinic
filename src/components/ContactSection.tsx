@@ -1,7 +1,16 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { MapPin, Phone, Clock, Mail, MessageCircle } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Clock,
+  Mail,
+  MessageCircle,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export const ContactSection = () => {
@@ -95,13 +104,13 @@ export const ContactSection = () => {
                         <span className="font-medium text-gray-900">
                           Morning:
                         </span>{" "}
-                        10:00 AM - 2:00 PM
+                        10:00 AM - 3:00 PM
                       </p>
                       <p>
                         <span className="font-medium text-gray-900">
                           Evening:
                         </span>{" "}
-                        5:00 PM - 9:00 PM
+                        5:00 PM - 11:00 PM
                       </p>
                       <p className="text-sm text-gold-dark font-medium">
                         Sunday Closed
@@ -178,33 +187,67 @@ export const ContactSection = () => {
       </section>
 
       {/* Dark Footer */}
-      <footer className="bg-[#050505] text-white pt-12 max-md:pt-8 pb-8 border-t border-white/5 relative overflow-hidden">
+      <footer className="bg-[#050505] text-white pt-8 max-md:pt-8 pb-6 border-t border-white/5 relative overflow-hidden">
         <div className="container-custom relative z-10">
-          <div className="md:grid md:grid-cols-4 gap-6 mb-4 max-md:flex flex-col max-md:justify-center max-md:items-center ">
+          <div className="flex mb-4 max-md:flex-col justify-between max-md:justify-center max-md:items-center ">
             {/* Brand */}
-            <div>
-              <div className="flex items-center gap-2 mb-6">
+            <div className="md:w-[32.5%]">
+              <div className="flex items-center gap-12 mb-4 max-md:mb-8 mt-2 w-full">
                 <img
                   src={logo}
                   alt="Curo Advanced Dental Care"
-                  className="h-12 max-md:h-16 w-auto brightness-0 invert opacity-90 max-md:mx-auto"
+                  className="h-12 md:h-16 w-auto brightness-0 invert opacity-90 max-md:mx-auto"
                 />
+                <div className="md:hidden">
+                  <h4 className="text-xl max-md:text-center font-bold text-white">
+                    Get In Touch
+                  </h4>
+                  <a
+                    href="tel:+918788127264"
+                    className="text-xl font-bold text-gold hover:text-white transition-colors"
+                  >
+                    +91 8788127264
+                  </a>
+                </div>
               </div>
-              <p className="text-gray-400 md:mb-6 max-md:text-center max-md:mx-6">
+              <p className="text-gray-400 md:mb-4 text-sm  max-md:hidden">
                 Advanced dental care with a compassionate touch. We are
                 dedicated to restoring smiles and confidence.
               </p>
-              <div className="flex gap-4">
-                {/* Socials placeholders if needed, currently just icons */}
+              <div className="hidden md:flex gap-4 mb-2">
+                <a
+                  href="https://www.instagram.com/curodentalcare/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.facebook.com/curodentalcare/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://twitter.com/curodentalcare"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+                >
+                  <Twitter className="w-4 h-4" />
+                </a>
               </div>
             </div>
             <div className="flex md:hidden gap-20">
               {/* Quick Links */}
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">
+                <h4 className="text-xl max-md:text-base font-bold text-white mb-2">
                   Quick Links
                 </h4>
-                <ul className="space-y-1">
+                <ul className="space-y-1 max-md:text-sm">
                   {[
                     "Home",
                     "Doctors",
@@ -226,10 +269,10 @@ export const ContactSection = () => {
 
               {/* Services */}
               <div>
-                <h4 className="text-xl font-bold text-white mb-2">
+                <h4 className="text-xl max-md:text-base font-bold text-white mb-2">
                   Our Services
                 </h4>
-                <ul className="space-y-1">
+                <ul className="space-y-1 max-md:text-sm">
                   {[
                     "Dental Implants",
                     "Root Canal",
@@ -244,10 +287,37 @@ export const ContactSection = () => {
                 </ul>
               </div>
             </div>
+            {/* Social Links for Mobile */}
+            <div className="flex md:hidden gap-6 mt-8 justify-center">
+              <a
+                href="https://www.instagram.com/curodentalcare/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/curodentalcare/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="https://twitter.com/curodentalcare"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+            </div>
             {/* Quick Links */}
             <div className="max-md:hidden">
               <h4 className="text-xl font-bold text-white mb-2">Quick Links</h4>
-              <ul className="space-y-1">
+              <ul className="space-y-0">
                 {[
                   "Home",
                   "Doctors",
@@ -272,7 +342,7 @@ export const ContactSection = () => {
               <h4 className="text-xl font-bold text-white mb-2">
                 Our Services
               </h4>
-              <ul className="space-y-1">
+              <ul className="space-y-0">
                 {[
                   "Dental Implants",
                   "Root Canal",
@@ -288,28 +358,28 @@ export const ContactSection = () => {
             </div>
 
             {/* Newsletter/Contact */}
-            <div>
+            <div className="max-md:hidden">
               <h4 className="text-xl max-md:text-2xl max-md:text-center font-bold text-white mb-2">
                 Get In Touch
               </h4>
-              <p className="text-gray-400 mb-2 max-md:text-center">
+              <p className="text-gray-400 mb-2  max-md:text-center">
                 Ready for your checkup?
               </p>
               <a
                 href="tel:+918788127264"
-                className="text-2xl  font-bold text-gold hover:text-white transition-colors"
+                className="text-2xl max-md:text-xl max-md:ml-4 font-bold text-gold hover:text-white transition-colors"
               >
                 +91 8788127264
               </a>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-gray-500">
+          <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm max-md:text-xs text-gray-500">
               © {new Date().getFullYear()} Curo Advanced Dental Care. All rights
               reserved.
             </p>
-            <p className="text-sm text-gray-600 flex items-center gap-2">
+            <p className="text-sm max-md:text-xs text-gray-600 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-gold rounded-full" />
               Precision. Compassion. Excellence.
             </p>

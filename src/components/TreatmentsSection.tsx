@@ -1,36 +1,19 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import {
-  ScanLine,
-  Scan,
-  HeartPulse,
-  Bone,
-  Crown,
-  RefreshCcw,
-  Clock,
-  Sparkles,
-  SmilePlus,
-  Brackets,
-  Baby,
-  Scissors,
-  Zap,
-  MessageCircle,
-} from "lucide-react";
+import { useRef, useState } from "react";
+import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
 const treatmentCategories = [
   {
     title: "Diagnostic & Digital Dentistry",
     items: [
       {
-        icon: ScanLine,
+        image: "./src/assets/treatments/Digital X-ray.png",
         name: "Digital X-Ray",
-        description: "Accurate diagnosis with minimal radiation",
       },
       {
-        icon: Scan,
+        image: "./src/assets/treatments/Intraoral Scanner.png",
         name: "Intraoral Scanner",
-        description: "Comfortable, precise digital impressions",
       },
     ],
   },
@@ -38,29 +21,24 @@ const treatmentCategories = [
     title: "Restorative & Advanced Care",
     items: [
       {
-        icon: HeartPulse,
+        image: "./src/assets/treatments/Root Canal Treatment.png",
         name: "Root Canal Treatment",
-        description: "Safe, efficient, and pain-free treatment",
       },
       {
-        icon: Bone,
+        image: "./src/assets/treatments/Dental Implants.png",
         name: "Dental Implants",
-        description: "Permanent replacement for missing teeth",
       },
       {
-        icon: Crown,
+        image: "./src/assets/treatments/Crown & Bridge Treatment .png",
         name: "Crown & Bridge",
-        description: "Restore strength, function, and appearance",
       },
       {
-        icon: RefreshCcw,
+        image: "./src/assets/treatments/Full Mouth Rehabilitation .png",
         name: "Full Mouth Rehabilitation",
-        description: "Complete oral restoration for complex cases",
       },
       {
-        icon: Clock,
+        image: "./src/assets/treatments/Single Visit Dentures.png",
         name: "Single Visit Dentures",
-        description: "Quick and comfortable tooth replacement",
       },
     ],
   },
@@ -68,14 +46,12 @@ const treatmentCategories = [
     title: "Cosmetic Dentistry",
     items: [
       {
-        icon: SmilePlus,
+        image: "./src/assets/treatments/Digital Smile Design.png",
         name: "Digital Smile Designing",
-        description: "Visualize your new smile before treatment",
       },
       {
-        icon: Sparkles,
+        image: "./src/assets/treatments/Teeth Whitening.png",
         name: "Teeth Whitening",
-        description: "Brighten your smile safely and effectively",
       },
     ],
   },
@@ -83,9 +59,8 @@ const treatmentCategories = [
     title: "Orthodontics",
     items: [
       {
-        icon: Brackets,
+        image: "./src/assets/treatments/Braces & Aligners.png",
         name: "Braces & Aligners",
-        description: "Correct teeth alignment for all age groups",
       },
     ],
   },
@@ -93,23 +68,129 @@ const treatmentCategories = [
     title: "Family & Specialized Care",
     items: [
       {
-        icon: Baby,
+        image: "./src/assets/treatments/Kids Dentistry.png",
         name: "Kids Dentistry",
-        description: "Gentle and friendly dental care for children",
       },
       {
-        icon: Scissors,
+        image: "./src/assets/treatments/Wisdom Tooth Extraction.png",
         name: "Wisdom Tooth Extraction",
-        description: "Safe and minimally invasive procedures",
       },
       {
-        icon: Zap,
+        image: "./src/assets/treatments/Laser Dentistry.png",
         name: "Laser Dentistry",
-        description: "Advanced, precise treatment with faster healing",
       },
     ],
   },
 ];
+
+const TreatmentCard = ({ item, index, isInView, categoryIndex }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.1,
+        delay: categoryIndex * 0.1 + index * 0.05,
+      }}
+      whileHover={{ y: -8, transition: { duration: 0.1 } }}
+      className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-gold-lg border border-gray-100 hover:border-gold/30 transition-all duration-100 cursor-pointer flex-shrink-0"
+    >
+      <div className="relative overflow-hidden aspect-[4/3] bg-gray-900">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-100 opacity-90 group-hover:opacity-100"
+        />
+        {/* Dark gradient overlay at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-100 transition-opacity duration-100" />
+
+        {/* Text content overlay */}
+        <div className="absolute inset-0 flex items-end p-5">
+          <h4 className="text-lg font-bold text-white group-hover:text-gold transition-colors duration-300 leading-tight">
+            {item.name}
+          </h4>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const CategorySlider = ({ category, categoryIndex, isInView }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalItems = category.items.length;
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === totalItems - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <div className="md:hidden">
+      <div className="relative">
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex transition-transform duration-300 ease-out"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+            }}
+          >
+            {category.items.map((item, index) => (
+              <div key={item.name} className="w-full flex-shrink-0 px-2">
+                <TreatmentCard
+                  item={item}
+                  index={index}
+                  isInView={isInView}
+                  categoryIndex={categoryIndex}
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Navigation Arrows */}
+        {totalItems > 1 && (
+          <>
+            <button
+              onClick={handlePrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-900 hover:bg-gold hover:text-white transition-colors z-10 border border-gold border-1.5"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-900 hover:bg-gold hover:text-white transition-colors z-10 border border-gold border-1.5"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </>
+        )}
+
+        {/* Dots Indicator */}
+        {totalItems > 1 && (
+          <div className="flex justify-center gap-2 mt-4">
+            {category.items.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "bg-gold w-6"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export const TreatmentsSection = () => {
   const sectionRef = useRef(null);
@@ -153,44 +234,32 @@ export const TreatmentsSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-6">
                 <div className="w-4 h-1 bg-gradient-gold rounded-full" />
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900">
                   {category.title}
                 </h3>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              {/* Desktop Grid - 5 cards per row */}
+              <div className="hidden md:grid md:grid-cols-5 gap-6">
                 {category.items.map((item, itemIndex) => (
-                  <motion.div
+                  <TreatmentCard
                     key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{
-                      duration: 0.2,
-                      delay: categoryIndex * 0.1 + itemIndex * 0.05,
-                    }}
-                    whileHover={{ x: 3, transition: { duration: 0.2 } }}
-                    className="group bg-white rounded-2xl p-3 shadow-md hover:shadow-gold-lg border border-transparent hover:border-gold/30 transition-all duration-2 00 relative overflow-hidden flex items-center gap-3.5"
-                  >
-                    {/* Hover Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-gold opacity-0 group-hover:opacity-5 transition-opacity duration-200" />
-
-                    <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-gold-dark group-hover:bg-gold group-hover:text-white transition-colors duration-200 shadow-inner flex-shrink-0">
-                      <item.icon className="w-6 h-6" />
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-bold text-gray-900 group-hover:text-gold-dark transition-colors">
-                        {item.name}
-                      </h4>
-                      <p className="text-sm text-gray-500 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
+                    item={item}
+                    index={itemIndex}
+                    isInView={isInView}
+                    categoryIndex={categoryIndex}
+                  />
                 ))}
               </div>
+
+              {/* Mobile Slider */}
+              <CategorySlider
+                category={category}
+                categoryIndex={categoryIndex}
+                isInView={isInView}
+              />
             </motion.div>
           ))}
         </div>
@@ -214,7 +283,7 @@ export const TreatmentsSection = () => {
                 Ready to transform
                 <br className="md:hidden" /> your smile?
               </h3>
-              <p className="text-gray-300 mb-8 max-md:mb-6 max-md:text-base  mx-auto text-lg">
+              <p className="text-gray-300 mb-8 max-md:mb-6 max-md:text-base mx-auto text-lg">
                 Book a consultation today and let our experts guide you to
                 better oral health.
               </p>
@@ -225,7 +294,7 @@ export const TreatmentsSection = () => {
                 className="btn-primary inline-flex items-center gap-2 text-lg px-8 hover:scale-105"
               >
                 <MessageCircle className="w-5 h-5" />
-                Book Your Appointment
+                Book <span className="max-md:hidden">Your </span>Appointment
               </a>
             </div>
           </div>

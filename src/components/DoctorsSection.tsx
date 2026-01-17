@@ -1,249 +1,364 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import React, { useState } from "react";
 import {
-  GraduationCap,
+  ChevronDown,
+  ChevronUp,
   Award,
-  Users,
-  Stethoscope,
-  FlaskConical,
-  Handshake,
-  Copyright,
-  Syringe,
-  FileText,
-  Trophy,
+  User,
+  GraduationCap,
+  Heart,
+  Star,
 } from "lucide-react";
+import maleDoc from "../assets/maleDoc.jpeg";
+import femaleDoc from "../assets/femaleDoc.jpg";
 
-const drSachinHighlights = [
-  { icon: Stethoscope, text: "Prosthodontist & Implant Specialist" },
+const doctors = [
   {
-    icon: GraduationCap,
-    text: "Former Associate Professor – Aditya Dental College",
+    id: "sachin",
+    name: "Dr. Sachin Sonawane",
+    primaryRole: "Prosthodontist & Implantologist",
+    secondaryRole: "BDS, MDS (Prosthodontics)",
+    intro:
+      "Experience advanced restorative and implant dental care with Dr. Sachin Sonawane's expertise in prosthetic and implant treatments.",
+    imageOnLeft: true,
+    image: maleDoc,
+    expertise: [
+      {
+        title: "Prosthodontist & Implantologist",
+        subtitle: "Restorative Expert",
+        description:
+          "Dr. Sachin Sonawane is an experienced Prosthodontist and Implantologist known for precision, ethical practice, and patient-first care.",
+      },
+      {
+        title: "Extensive Implant Experience",
+        subtitle: "500+ Procedures",
+        description:
+          "He has completed 500+ implant procedures, delivering predictable, long-lasting, and natural-looking results with high accuracy.",
+      },
+      {
+        title: "Advanced Implant Planning",
+        subtitle: "Guided Implantology Expert",
+        description:
+          "Specialized in prosthetically driven guided implantology, ensuring implants are placed with proper planning for strong function and aesthetics.",
+      },
+      {
+        title: "Academic Background",
+        subtitle: "Former Associate Professor",
+        description:
+          "Former Associate Professor at Aditya Dental College, combining academic excellence with real clinical expertise.",
+      },
+      {
+        title: "Patient-First Approach",
+        subtitle: "Ethical & Transparent Care",
+        description:
+          "Trusted for clear communication, detailed treatment planning, and ethical care focused on comfort and long-term success.",
+      },
+    ],
+    awards: [
+      "Recipient of the prestigious F.D. Mirza Award (First Prize) by the Indian Prosthodontic Society",
+    ],
+    stats: {
+      experience: "15+ Years",
+      procedures: "500+",
+      rating: "4.9★",
+    },
   },
-  { icon: FlaskConical, text: "500+ implant procedures" },
-  { icon: Users, text: "Expert in prosthetically driven guided implantology" },
-  { icon: Award, text: "F.D. Mirza Award – Indian Prosthodontic Society" },
-  { icon: Handshake, text: "Patient-focused, ethical approach" },
+  {
+    id: "dhanashri",
+    name: "Dr. Dhanashri Sonawane",
+    primaryRole: "Oral & Maxillofacial Surgeon",
+    secondaryRole: "BDS, MDS (Oral & Maxillofacial Surgery)",
+    intro:
+      "Experience safe and advanced surgical dental care with Dr. Dhanashri Sonawane's expertise in oral surgery and implant treatments.",
+    imageOnLeft: false,
+    image: femaleDoc,
+    expertise: [
+      {
+        title: "Oral & Maxillofacial Surgeon",
+        subtitle: "Surgical Specialist",
+        description:
+          "Dr. Dhanashri Sonawane is a highly skilled Oral & Maxillofacial Surgeon and Implantologist known for precise and patient-centric care.",
+      },
+      {
+        title: "Extensive Implant Experience",
+        subtitle: "500+ Implant Placements",
+        description:
+          "She has successfully completed 500+ dental implant placements, focusing on long-term implant stability and bone health.",
+      },
+      {
+        title: "Advanced Implant Surgeries",
+        subtitle: "Complex Case Expert",
+        description:
+          "Expert in advanced implant surgeries and bone augmentation, providing strong support even in difficult implant cases.",
+      },
+      {
+        title: "Specialized Surgical Procedures",
+        subtitle: "Sinus Lift & Surgical Care",
+        description:
+          "Performs advanced procedures like sinus lift surgeries (direct & indirect), wisdom tooth removal, biopsies, and pre-prosthetic surgeries.",
+      },
+      {
+        title: "Comfort-Focused Treatment",
+        subtitle: "Painless & Gentle Care",
+        description:
+          "Known for painless, minimally invasive surgical techniques with careful planning and smooth recovery for patients.",
+      },
+    ],
+    awards: [
+      "1st Award – AOMSI Poster Presentation",
+      "1st Award – Paper Presentation on Pan-Facial Fractures",
+      "1st Rank – MUHS, Nashik (BDS)",
+      "4th Rank – MDS Oral & Maxillofacial Surgery",
+    ],
+    stats: {
+      experience: "12+ Years",
+      procedures: "500+",
+      rating: "4.8★",
+    },
+  },
 ];
 
-const drDhanashriHighlights = [
-  {
-    icon: Stethoscope,
-    text: "Oral & Maxillofacial Surgeon and Implantologist",
-  },
-  { icon: Syringe, text: "500+ dental implant placements" },
-  {
-    icon: FlaskConical,
-    text: "Expertise in advanced implant surgeries & bone augmentation",
-  },
-  {
-    icon: Copyright,
-    text: "Several copyright holder in Oral & Maxillofacial Surgery",
-  },
-  {
-    icon: FileText,
-    text: "Award-winning researcher with national & international publications",
-  },
-  {
-    icon: Trophy,
-    text: "Known for painless, precise & patient-centric surgical care",
-  },
-];
-
-interface DoctorCardProps {
-  name: string;
-  title: string;
-  description: string;
-  highlights: { icon: React.ElementType; text: string }[];
-  expertise?: string[];
-  awards?: string[];
-  emoji: string;
-  delay?: number;
-}
-
-const DoctorCard = ({
-  name,
-  title,
-  description,
-  highlights,
-  expertise,
-  awards,
-  emoji,
-  delay = 0,
-}: DoctorCardProps) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+const DoctorCard = ({ doctor }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className="bg-card rounded-3xl p-6 md:p-8 shadow-xl border border-border hover-lift gold-border-glow"
-    >
-      {/* Header */}
-      <div className="flex items-start gap-4 mb-6">
-        <div className="w-14 h-14 bg-gradient-gold rounded-2xl flex items-center justify-center flex-shrink-0 shadow-gold">
-          <span className="text-3xl md:text-3xl">{emoji}</span>
-        </div>
-        <div>
-          <h3 className="text-xl md:text-2xl font-bold text-foreground">
-            {name}
-          </h3>
-          <p className="text-primary font-medium">{title}</p>
-        </div>
-      </div>
-
-      {/* Description */}
-      <div className="text-muted-foreground mb-6 leading-relaxed space-y-4 text-justify text-sm">
-        {description
-          .split("\n")
-          .map(
-            (paragraph, index) =>
-              paragraph.trim() && <p key={index}>{paragraph.trim()}</p>
-          )}
-      </div>
-
-      {/* Quick Highlights */}
-      <div className="mb-4">
-        <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-          Quick Highlights
-        </h4>
-        <div className="grid gap-3">
-          {highlights.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.4, delay: delay + 0.1 + index * 0.05 }}
-              className="flex items-start gap-3"
-            >
-              <div className="w-6 h-6 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                <item.icon className="w-4 h-4 text-primary" />
-              </div>
-              <span className="text-sm text-foreground/80">{item.text}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Expertise */}
-      {expertise && expertise.length > 0 && (
-        <div className="py-4 border-t border-border">
-          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
-            Clinical Expertise
-          </h4>
-          <ul className="grid gap-2">
-            {expertise.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2 text-sm text-muted-foreground"
-              >
-                <span className="text-primary">•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Awards */}
-      {awards && awards.length > 0 && (
-        <div className="pt-4 border-t border-border">
-          <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
-            Awards & Achievements
-          </h4>
-          <ul className="grid gap-2">
-            {awards.map((item, index) => {
-              const isAward = item.toLowerCase().includes("award");
-              return (
-                <li
-                  key={index}
-                  className="flex items-start gap-2 text-sm text-muted-foreground"
+    <div className="mb-16 last:mb-0">
+      <div
+        className={`flex flex-col ${
+          doctor.imageOnLeft ? "lg:flex-row" : "lg:flex-row-reverse"
+        } gap-8 items-start`}
+      >
+        {/* Image Section */}
+        <div className="w-full lg:w-[40%] relative">
+          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50 shadow-lg">
+            {/* Verified Badge */}
+            <div className="absolute top-3 left-3 z-10">
+              <span className="bg-gold text-secondary px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-md">
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
                 >
-                  <span className="text-primary">{isAward ? "🏆" : "📜"}</span>
-                  {item}
-                </li>
-              );
-            })}
-          </ul>
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Verified Doctor
+              </span>
+            </div>
+
+            {/* Doctor Image */}
+            <div className="w-full aspect-[3.4/4] bg-slate-100 flex items-center justify-center overflow-hidden">
+              <img
+                src={doctor.image}
+                alt={doctor.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Bottom Info Overlay - Cohesive Vertical Layout */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent py-2 px-4 max-md:pb-4 pt-32">
+              <div className="space-y-2">
+                {/* 1. Name & Basic Info */}
+                <div className="flex justify-between items-center md:items-end max-md:mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-white text-lg font-bold">
+                      {doctor.name}
+                    </h3>
+                    <p className="text-gold-light text-xs font-semibold">
+                      {doctor.secondaryRole}
+                    </p>
+                    <p className="text-slate-300 text-[10px]">
+                      {doctor.primaryRole}
+                    </p>
+                  </div>
+
+                  {/* Mobile Dropdown Button */}
+                  <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="lg:hidden bg-gold text-secondary p-2 rounded-full shadow-lg hover:bg-gold-dark transition-colors mr-4"
+                    aria-label="Toggle details"
+                  >
+                    {isExpanded ? (
+                      <ChevronUp size={18} />
+                    ) : (
+                      <ChevronDown size={18} />
+                    )}
+                  </button>
+                </div>
+
+                {/* 2. Summary Stats Cards (Role, Exp, Rating) */}
+                <div className="grid grid-cols-3 gap-2">
+                  {/* Card 1: Role/Qual */}
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 p-2 rounded-xl flex items-center gap-2">
+                    <div className="bg-gold/20 p-1.5 rounded-lg shrink-0">
+                      <GraduationCap className="w-4 h-4 text-gold" />
+                    </div>
+                    <div className="overflow-hidden">
+                      <p className="text-[9px] font-bold text-white leading-tight uppercase truncate">
+                        {doctor.secondaryRole.split(",")[0]}
+                      </p>
+                      <p className="text-[8px] text-white/60 leading-tight">
+                        Expert Specialist
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Experience */}
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 p-2 rounded-xl flex items-center gap-2">
+                    <div className="bg-gold/20 p-1.5 rounded-lg shrink-0">
+                      <Heart className="w-4 h-4 text-gold" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-white leading-tight">
+                        {doctor.stats.experience}
+                      </p>
+                      <p className="text-[8px] text-white/60 leading-tight">
+                        Experience
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Rating or Procedures */}
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 p-2 rounded-xl flex items-center gap-2">
+                    <div className="bg-gold/20 p-1.5 rounded-lg shrink-0">
+                      <Star className="w-4 h-4 text-gold" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-white leading-tight">
+                        {doctor.stats.rating}
+                      </p>
+                      <p className="text-[8px] text-white/60 leading-tight">
+                        Patient Rating
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Awards & Achievements - List Format */}
+                <div className="pt-2 border-t border-white/10 max-md:hidden">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-white text-[10px] font-bold uppercase tracking-wider flex items-center">
+                      Awards & Achievements
+                    </span>
+                  </div>
+                  <ul className="">
+                    {doctor.awards.map((award, i) => (
+                      <li key={i} className="flex items-start gap-1">
+                        <span className="text-[10px] shrink-0">🏆</span>
+                        <p className="text-[10px] text-white/90 leading-snug font-medium">
+                          {award}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </motion.div>
+
+        {/* Content Section */}
+        <div
+          className={`w-full lg:w-[60%] ${
+            isExpanded ? "block" : "hidden lg:block"
+          }`}
+        >
+          <div className="space-y-5">
+            {/* Header */}
+            <div>
+              <h4 className="text-xl font-bold text-slate-900 mb-2">
+                Meet Your <span className="text-gold">Doctor</span>
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed italic border-l-3 border-gold pl-3 py-1 bg-gold/5 rounded-r">
+                {doctor.intro}
+              </p>
+            </div>
+
+            {/* Expertise Cards */}
+            <div className="space-y-3">
+              {doctor.expertise.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex gap-3 group hover:bg-slate-50 p-2.5 rounded-lg transition-colors"
+                >
+                  <div className="shrink-0">
+                    <div className="bg-gold-muted p-2 rounded-lg group-hover:bg-gold transition-colors">
+                      <User className="w-4 h-4 text-gold group-hover:text-secondary" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h5 className="font-bold text-slate-900 text-xs">
+                        {item.title}
+                      </h5>
+                      <span className="bg-gold-muted text-gold-dark text-[9px] px-2 py-0.5 rounded-full font-semibold">
+                        {item.subtitle}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Awards & Achievements - Mobile Only */}
+              <div className="lg:hidden mt-4 pt-4 border-t border-slate-100">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="bg-gold-muted p-2 rounded-lg">
+                    <Award className="w-4 h-4 text-gold" />
+                  </div>
+                  <h5 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
+                    Awards & Achievements
+                  </h5>
+                </div>
+                <div className="space-y-2 pl-1">
+                  {doctor.awards.map((award, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-gold mt-0.5 text-xs">🏆</span>
+                      <p className="text-[11px] text-slate-600 leading-relaxed font-medium">
+                        {award}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export const DoctorsSection = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
+export default function DoctorsSection() {
   return (
-    <section
-      id="doctors"
-      ref={sectionRef}
-      className="py-12 px-4 bg-white relative"
-    >
-      <div className="container-custom">
+    <section id="doctors" className="py-16 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <span className="inline-block px-4 py-2 bg-gold/10 rounded-full text-sm font-semibold text-gold-dark mb-4 tracking-wide uppercase">
-            Expert Care
+        <div className="text-center mb-12 max-w-2xl mx-auto">
+          <span className="text-gold font-bold text-xs uppercase tracking-wider mb-2 block">
+            Expert Clinical Team
           </span>
-          <h2 className="section-title">Meet Our Specialists</h2>
-          <p className="section-subtitle mx-auto">
-            Experienced specialists combining academic excellence with advanced
-            clinical expertise.
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+            Meet Our <span className="text-gradient-gold">Specialists</span>
+          </h2>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Our team of highly qualified and experienced dental specialists is
+            dedicated to providing you with the highest quality of clinical care
+            and personal service.
           </p>
-        </motion.div>
+        </div>
 
         {/* Doctor Cards */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          <DoctorCard
-            name="Dr. Sachin Sonawane"
-            title="Prosthodontist & Implantologist"
-            description={
-              "Dr. Sachin Sonawane is an experienced Prosthodontist and Implantologist known for precision, ethical practice, and patient-focused care. A former Associate Professor at Aditya Dental College, he combines academic excellence with advanced clinical expertise.\n\nWith 500+ successful implant procedures, he specializes in prosthodontically driven guided implantology and is a recipient of the prestigious F.D. Mirza Award by the Indian Prosthodontic Society."
-            }
-            emoji="👨‍⚕️"
-            highlights={drSachinHighlights}
-            awards={[
-              "F.D. Mirza Award (First Prize) – Indian Prosthodontic Society",
-            ]}
-            delay={0.1}
-          />
-
-          <DoctorCard
-            name="Dr. Dhanashri Sonawane"
-            title="Oral & Maxillofacial Surgeon & Implantologist"
-            description={
-              "Dr. Dhanashri Sonawane is a highly skilled Oral & Maxillofacial Surgeon known for providing precise, painless surgical care and patient-focused treatment. With 500+ implant placements, she specializes in advanced implant surgeries, bone augmentation, and complex maxillofacial procedures.\n\nAn award-winning researcher with national and international publications, she also holds multiple copyrights in Oral & Maxillofacial Surgery, reflecting her strong academic and research excellence."
-            }
-            emoji="👩‍⚕️"
-            highlights={drDhanashriHighlights}
-            expertise={[
-              "Painless, atraumatic & minimally invasive surgical procedures",
-              "Dental implants planned from a surgical and anatomical perspective",
-              "Sinus lift surgeries (direct & indirect)",
-              "Wisdom tooth removal (simple & complex)",
-              "Pre-prosthetic surgeries",
-              "Management of cysts, tumors & oral biopsies",
-            ]}
-            awards={[
-              "AOMSI Poster Presentation - 1st Award",
-              "Paper Presentation on Pan-Facial Fractures - 1st Award",
-              "MUHS, Nashik (BDS) - 1st Rank",
-              "MDS Oral & Maxillofacial Surgery - 4th Rank",
-            ]}
-            delay={0.2}
-          />
+        <div className="max-w-6xl mx-auto">
+          {doctors.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} />
+          ))}
         </div>
       </div>
     </section>
   );
-};
+}
