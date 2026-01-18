@@ -136,7 +136,6 @@ export const WhyChooseSection = () => {
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
-
             {/* Floating Badge */}
             <div className="absolute bottom-2 max-md:-bottom-6 -left-2  bg-white p-1 md:p-2 max-md:p-2 rounded-2xl shadow-xl z-20 max-w-xs border border-1 border-gold animate-fade-in">
               <div className="flex items-center gap-3">
