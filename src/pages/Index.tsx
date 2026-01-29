@@ -14,7 +14,7 @@ const Index = () => {
     "@context": "https://schema.org",
     "@type": "Dentist",
     name: "Curo Advanced Dental Care",
-    image: "https://curodentalcare.com/logo.png",
+    image: "https://ik.imagekit.io/curo/Curo%20Website/logo.png",
     url: "https://curodentalcare.com",
     telephone: "+918788127264",
     email: "curodentalcare@gmail.com",
