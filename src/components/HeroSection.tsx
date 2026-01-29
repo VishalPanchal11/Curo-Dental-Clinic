@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ChevronDown } from "lucide-react";
-import clinicInside from "@/assets/clinic-inside.png";
 
 export const HeroSection = () => {
   return (
@@ -18,7 +17,7 @@ export const HeroSection = () => {
         }}
       >
         <img
-          src={clinicInside}
+          src="https://ik.imagekit.io/curo/Curo%20Website/clinic-inside.png"
           alt="Clinic Background"
           className="w-full h-full object-cover -mt-5"
         />
@@ -135,7 +134,7 @@ export const HeroSection = () => {
           >
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white/50">
               <img
-                src={clinicInside}
+                src="https://ik.imagekit.io/curo/Curo%20Website/clinic-inside.png"
                 alt="Modern Dental Clinic Interior"
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                 loading="eager"

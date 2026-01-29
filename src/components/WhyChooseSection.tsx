@@ -11,10 +11,6 @@ import {
   Users,
   Heart,
 } from "lucide-react";
-import clinicOutside from "@/assets/clinic-outside.png";
-import patient1 from "@/assets/patient-1.png";
-import patient2 from "@/assets/patient-2.png";
-import patient3 from "@/assets/patient-3.png";
 
 const reasons = [
   {
@@ -128,7 +124,7 @@ export const WhyChooseSection = () => {
           >
             <div className="rounded-[1.5rem] overflow-hidden shadow-2xl border-4 border-white relative z-10 md:-top-8 ">
               <img
-                src={clinicOutside}
+                src="https://ik.imagekit.io/curo/Curo%20Website/clinic-outside.png"
                 alt="Curo Advanced Dental Care Clinic Exterior"
                 className="w-full object-cover transform hover:scale-[102%] transition-transform duration-300"
                 loading="lazy"
@@ -140,7 +136,7 @@ export const WhyChooseSection = () => {
             <div className="absolute bottom-2 max-md:-bottom-6 -left-2  bg-white p-1 md:p-2 max-md:p-2 rounded-2xl shadow-xl z-20 max-w-xs border border-1 border-gold animate-fade-in">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-3">
-                  {[patient1, patient2, patient3].map((img, i) => (
+                  {["https://ik.imagekit.io/curo/Curo%20Website/patient-1.png", "https://ik.imagekit.io/curo/Curo%20Website/patient-2.png", "https://ik.imagekit.io/curo/Curo%20Website/patient-3.png"].map((img, i) => (
                     <div
                       key={i}
                       className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden"

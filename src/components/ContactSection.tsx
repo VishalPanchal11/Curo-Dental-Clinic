@@ -11,7 +11,6 @@ import {
   Facebook,
   Twitter,
 } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 export const ContactSection = () => {
   const sectionRef = useRef(null);
@@ -194,7 +193,7 @@ export const ContactSection = () => {
             <div className="md:w-[32.5%]">
               <div className="flex items-center gap-12 mb-4 max-md:mb-8 mt-2 w-full">
                 <img
-                  src={logo}
+                  src="https://ik.imagekit.io/curo/Curo%20Website/logo.png"
                   alt="Curo Advanced Dental Care"
                   className="h-12 md:h-16 w-auto brightness-0 invert opacity-90 max-md:mx-auto"
                 />

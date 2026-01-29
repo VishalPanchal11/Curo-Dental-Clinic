@@ -8,11 +8,11 @@ const treatmentCategories = [
     title: "Diagnostic & Digital Dentistry",
     items: [
       {
-        image: "./src/assets/treatments/Digital X-ray.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Digital X-ray.png",
         name: "Digital X-Ray",
       },
       {
-        image: "./src/assets/treatments/Intraoral Scanner.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Intraoral Scanner.png",
         name: "Intraoral Scanner",
       },
     ],
@@ -21,11 +21,11 @@ const treatmentCategories = [
     title: "Restorative & Advanced Care",
     items: [
       {
-        image: "./src/assets/treatments/Root Canal Treatment.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Root Canal Treatment.png",
         name: "Root Canal Treatment",
       },
       {
-        image: "./src/assets/treatments/Dental Implants.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Dental Implants.png",
         name: "Dental Implants",
       },
       {
@@ -46,11 +46,11 @@ const treatmentCategories = [
     title: "Cosmetic Dentistry",
     items: [
       {
-        image: "./src/assets/treatments/Digital Smile Design.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Digital Smile Design.png",
         name: "Digital Smile Designing",
       },
       {
-        image: "./src/assets/treatments/Teeth Whitening.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Teeth Whitening.png",
         name: "Teeth Whitening",
       },
     ],
@@ -59,7 +59,7 @@ const treatmentCategories = [
     title: "Orthodontics",
     items: [
       {
-        image: "./src/assets/treatments/Braces & Aligners.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Braces & Aligners.png",
         name: "Braces & Aligners",
       },
     ],
@@ -68,15 +68,15 @@ const treatmentCategories = [
     title: "Family & Specialized Care",
     items: [
       {
-        image: "./src/assets/treatments/Kids Dentistry.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Kids Dentistry.png",
         name: "Kids Dentistry",
       },
       {
-        image: "./src/assets/treatments/Wisdom Tooth Extraction.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Wisdom Tooth Extraction.png",
         name: "Wisdom Tooth Extraction",
       },
       {
-        image: "./src/assets/treatments/Laser Dentistry.png",
+        image: "https://ik.imagekit.io/curo/Curo%20Website/treatments/Laser Dentistry.png",
         name: "Laser Dentistry",
       },
     ],

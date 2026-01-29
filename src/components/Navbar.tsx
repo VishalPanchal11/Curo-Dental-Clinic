@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Calendar } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -39,7 +38,7 @@ export const Navbar = () => {
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">
           <img
-            src={logo}
+            src="https://ik.imagekit.io/curo/Curo%20Website/logo.png"
             alt="Curo Advanced Dental Care"
             className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
           />

@@ -8,8 +8,6 @@ import {
   Heart,
   Star,
 } from "lucide-react";
-import maleDoc from "../assets/maleDoc.jpeg";
-import femaleDoc from "../assets/femaleDoc.jpg";
 
 const doctors = [
   {
@@ -20,7 +18,7 @@ const doctors = [
     intro:
       "Experience advanced restorative and implant dental care with Dr. Sachin Sonawane's expertise in prosthetic and implant treatments.",
     imageOnLeft: true,
-    image: maleDoc,
+    image: "https://ik.imagekit.io/curo/Curo%20Website/maleDoc.jpeg",
     expertise: [
       {
         title: "Prosthodontist & Implantologist",
@@ -70,7 +68,7 @@ const doctors = [
     intro:
       "Experience safe and advanced surgical dental care with Dr. Dhanashri Sonawane's expertise in oral surgery and implant treatments.",
     imageOnLeft: false,
-    image: femaleDoc,
+    image: "https://ik.imagekit.io/curo/Curo%20Website/femaleDoc.jpg",
     expertise: [
       {
         title: "Oral & Maxillofacial Surgeon",
