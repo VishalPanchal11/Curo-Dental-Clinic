@@ -216,7 +216,7 @@ export const ContactSection = () => {
               </p>
               <div className="hidden md:flex gap-4 mb-2">
                 <a
-                  href="https://www.instagram.com/curodentalcare/"
+                  href="https://www.instagram.com/curo_advanced_dental_care/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
@@ -290,7 +290,7 @@ export const ContactSection = () => {
             {/* Social Links for Mobile */}
             <div className="flex md:hidden gap-6 mt-8 justify-center">
               <a
-                href="https://www.instagram.com/curodentalcare/"
+                href="https://www.instagram.com/curo_advanced_dental_care/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all duration-300"
